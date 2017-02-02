@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>AfmxImageList.qml</file>
+    </qresource>
+</RCC>
