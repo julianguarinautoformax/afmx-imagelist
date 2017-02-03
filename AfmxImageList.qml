@@ -4,7 +4,7 @@ Item {
     id: afmxImageList 
     property real marginFactor:0.01
     
-    property var listModelJson : '[{"image:img0.png"},{"image:im1.png"}]'
+    property var listModelJsonString : '[{"image":"img0.png"},{"image":"im1.png"}]'
     
     
     Rectangle {
@@ -49,7 +49,14 @@ Item {
             }
         }
         Component.onCompleted: {
+            console.log(listModelJsonString)
+            var listModelJson = JSON.parse(listModelJsonString)
             console.log(listModelJson)
+            console.log(listModelJson[0])
+            console.log(listModelJson[0]["image"])
+            
+            
+            
         }        
         
     }
