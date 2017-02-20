@@ -4,9 +4,11 @@ Item {
     id: afmxImageList 
     property real marginFactor:0.01
     
-    property var listModelJsonString : '[{"image":"img0.png"},{"image":"im1.png"}]'
+    property var listModelJsonString : '[]'
     
-    
+    property bool testPath: false
+
+
     Rectangle {
         
         
@@ -17,20 +19,28 @@ Item {
         
         Item {
             id:accordionContainer
-            property int maxrows:10
+            property int maxrows:4
             
             
             anchors.fill:parent
-            ListView{
+            GridView{
                 id:accordionView
+                clip:true
                 anchors.fill:parent
-                
+                cellHeight: parent.height/accordionContainer.maxrows
+                cellWidth: cellHeight
+
+                flow: GridView.FlowTopToBottom
+                layoutDirection: Qt.RightToLeft
+                verticalLayoutDirection: GridView.BottomToTop
+
                 model:accordionModel
                 delegate: accordionDelegate
                 
             }
             ListModel{
                 id:accordionModel
+
                 
             }
             
@@ -38,25 +48,33 @@ Item {
             Component{
                 id:accordionDelegate
                 Rectangle{
-                    width:accordionContainer.width
-                    height:accordionContainer.height/accordionContainer.maxrows < accordionContainer.height/accordionModel.count ? accordionContainer.height/accordionContainer.maxrows : accordionContainer.height/accordionModel.count 
+                    //width:accordionContainer.width
+                    //height:accordionContainer.height/accordionContainer.maxrows < accordionContainer.height/accordionModel.count ? accordionContainer.height/accordionContainer.maxrows : accordionContainer.height/accordionModel.count
+                    width:accordionView.cellWidth
+                    height:accordionView.cellHeight
                     border.color: "green"
                     Text {
-                        anchors.fill:parent
+                        //anchors.fill:parent
+                        anchors.centerIn: parent
                         text:image                        
                     }
                 }
             }
         }
         Component.onCompleted: {
-            console.log(listModelJsonString)
-            var listModelJson = JSON.parse(listModelJsonString)
-            console.log(listModelJson)
-            console.log(listModelJson[0])
-            console.log(listModelJson[0]["image"])
-            
-            
-            
+            if (testPath == true){
+                console.log("Test Path Enabled")
+                var index = 0
+                var limit =  Math.floor((Math.random() * 10) + 1)
+                limit = 100
+                for (index = 0; index < limit; index ++ ){
+                    // This is available in all editors.
+                    accordionModel.append({"image":index})
+                }
+
+            }
+
+
         }        
         
     }

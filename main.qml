@@ -12,7 +12,8 @@ ApplicationWindow {
     
     AfmxImageList{
         anchors.fill:parent
-        marginFactor: 0.05
+        marginFactor: 0.02
+        testPath: true
     }
     
     
