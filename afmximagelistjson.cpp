@@ -5,22 +5,24 @@
 #include <QDateTime>
 #include <QJsonValue>
 #include <QFileInfoList>
-AfmxImageListJson::AfmxImageListJson()
+
+
+AfmxImageListJson::AfmxImageListJson(QObject * parent):QObject(parent)
 {
     
     
     
     
     
-}
-AfmxImageListJson::AfmxImageListJson(QString & directoryPath, std::initializer_list<QString> filterNames){
     
+}
+
+void AfmxImageListJson::setdirpath(QString & directoryPath){
     
     afmxImgDirPath = QDir(directoryPath);
     afmxImgListJson = { };
     
     if (afmxImgDirPath.exists()){
-        /* The directory exists, get png list.*/
         QStringList fltrs(filterNames);
         afmxImgDirPath.setNameFilters(fltrs);
         
@@ -35,6 +37,7 @@ AfmxImageListJson::AfmxImageListJson(QString & directoryPath, std::initializer_l
             QImage afmx_img = QImage(fi.absoluteFilePath());
             qint64 afmx_img_cache = afmx_img.cacheKey();
             QString afmx_img_created = fi.created().toString("t-yyyyMMM-ddHHmmsszzz");
+            
             
             QJsonObject fi_j {
                 {"afmx_img_basename_cache",QJsonValue(fi.baseName()+ "_0x"+QString::number(afmx_img_cache,16))},
@@ -57,9 +60,5 @@ AfmxImageListJson::AfmxImageListJson(QString & directoryPath, std::initializer_l
         
         
     }
-    
-    
-    
-    
     
 }

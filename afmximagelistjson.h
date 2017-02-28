@@ -11,16 +11,24 @@ class AfmxImageListJson :public QObject
     bool m_valid;
     QJsonObject afmxImgListJson;
     QDir afmxImgDirPath;
+    std::initializer_list<QString> filters;
+    
+    
+    Q_PROPERTY(QString filters READ filters WRITE setfilters NOTIFY filterschanged)
+    Q_PROPERTY(QString dirpath READ dirpath WRITE setdirpath NOTIFY dirpathchanged)
     
 public:
     AfmxImageListJson(QObject * parent = 0);
-    AfmxImageListJson(QString & directoryPath, std::initializer_list<QString> filterNames = {"*.png"}, QObject * parent = 0);
         
     
+    QString dirpath() const{
+        return afmxImgDirPath.absolutePath();
+    }
+    
+    void setdirpath(QString & directoryPath);
     
     
-    
-    bool isValid(){ return m_valid; }
+    //bool isValid(){ return m_valid; }
        
     
     
