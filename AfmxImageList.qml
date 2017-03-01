@@ -3,13 +3,20 @@ import QtQuick 2.0
 Item {
     id: afmxImageList 
     property real marginFactor:0.01
-    
     property var listModelJsonString : '[]'
-    
     property bool testPath: false
+    property string folderPath: ""
 
-
+    onFolderPathChanged: {
+        console.log("Folder Selected:",folderPath)
+        
+        
+    }
+    
     Rectangle {
+        
+        
+        
         
         
         id:container
