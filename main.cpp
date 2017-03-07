@@ -6,7 +6,7 @@
 
 void registerAfmxImageList(){
     
-    qmlRegisterType<AfmxImageListJson>("com.atfmx.imagelist",1,0,"AfmxImageList");
+    qmlRegisterType<AfmxImageListJson>("com.afmx.imagelist",1,0,"AfmxImageListViewController");
 }
 
 

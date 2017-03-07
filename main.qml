@@ -38,7 +38,7 @@ ApplicationWindow {
         folder: shortcuts.home
         selectFolder: true
         onAccepted: {
-            console.log("You chose: " + fileDialog.folder)
+            console.log("You chose: " + Qt.resolvedUrl(fileDialog.folder))
             afmxImageList.folderPath = fileDialog.folder
             Qt.quit()
         }
@@ -66,7 +66,8 @@ ApplicationWindow {
 
         ]
     }
-
+    
+    
     
     
     

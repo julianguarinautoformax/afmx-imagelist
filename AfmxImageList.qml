@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import com.afmx.imagelist 1.0
 
 Item {
     id: afmxImageList 
@@ -7,9 +8,20 @@ Item {
     property bool testPath: false
     property string folderPath: ""
 
+    
+    
+    AfmxImageListViewController{
+        
+        id: viewController
+        
+        
+        
+        
+    }
+    
     onFolderPathChanged: {
         console.log("Folder Selected:",folderPath)
-        
+        viewController.dirpath = folderPath
         
     }
     
