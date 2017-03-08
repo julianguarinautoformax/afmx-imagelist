@@ -1,6 +1,7 @@
 #include "afmximagelistjson.h"
 
 #include <QUrl>
+#include <QList>
 #include <QImage>
 #include <QDebug>
 #include <QDateTime>
@@ -34,17 +35,35 @@ void AfmxImageListJson::updateImageList(){
 		QString afmx_img_created = fi.created().toString("t-yyyyMMM-ddHHmmsszzz");
 		QVariantMap fi_m {
 			{
-				{"afmx_img_basename_cache",QVariant(fi.baseName()+ "_0x"+QString::number(afmx_img_cache,16))},
-                {"afmx_img_basename",QVariant(fi.baseName())},
-                {"afmx_img_suffix",QVariant(fi.suffix())},
-                {"afmx_img_abspath",QVariant(fi.absoluteFilePath())},
-                {"afmx_img_basename_created",QVariant(fi.baseName()+ "_"+afmx_img_created)}
+				{"afmx_img_basename_cache",fi.baseName()+ "_0x"+QString::number(afmx_img_cache,16)},
+                {"afmx_img_basename",fi.baseName()},
+                {"afmx_img_suffix",fi.suffix()},
+                {"afmx_img_abspath",fi.absoluteFilePath()},
+                {"afmx_img_basename_created",fi.baseName()+ "_"+afmx_img_created}
 				
 			}
 		};
 		li << fi_m;
+		
+		
+		QList<QString>::const_iterator fi_m_keys_it;
+		QList<QString> fi_m_keys = fi_m.keys();
+		qInfo()<<fi_m["afmx_img_basename"]<<":{";
+		for (fi_m_keys_it = fi_m_keys.begin(); fi_m_keys_it!=fi_m_keys.end();fi_m_keys_it++){
+			
+			QString key = *fi_m_keys_it;
+			qInfo()<<"IMGCACHE:"<<fi_m["afmx_img_basename_cache"];
+			qInfo()<<"BASENAME:"<<fi_m["afmx_img_basename"];
+			qInfo()<<"  SUFFIX:"<<fi_m["afmx_img_suffix"];
+			qInfo()<<" ABSPATH:"<<fi_m["afmx_img_abspath"];
+			qInfo()<<" CREATED:"<<fi_m["afmx_img_basename_created"];
+			break;
+			
+		}
+		qInfo()<<"}";
 	}
 	afmxImgListMap["listMap"] = li;
+	
 	
 }
 
