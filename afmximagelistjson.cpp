@@ -30,8 +30,10 @@ void AfmxImageListJson::updateImageList(){
 	for (fil_it=fil.begin();fil_it!=fil.end();++fil_it){
 		
 		QFileInfo fi = *fil_it;
-		QImage afmx_img = QImage(fi.absolutePath());
+		if (fi.isDir())continue;
+		QImage afmx_img = QImage(fi.absoluteFilePath());
 		qint64 afmx_img_cache =	afmx_img.cacheKey();
+		qInfo()<<afmx_img_cache;
 		QString afmx_img_created = fi.created().toString("t-yyyyMMM-ddHHmmsszzz");
 		QVariantMap fi_m {
 			{
@@ -49,17 +51,12 @@ void AfmxImageListJson::updateImageList(){
 		QList<QString>::const_iterator fi_m_keys_it;
 		QList<QString> fi_m_keys = fi_m.keys();
 		qInfo()<<fi_m["afmx_img_basename"]<<":{";
-		for (fi_m_keys_it = fi_m_keys.begin(); fi_m_keys_it!=fi_m_keys.end();fi_m_keys_it++){
+		qInfo()<<"IMGCACHE:"<<fi_m["afmx_img_basename_cache"];
+		qInfo()<<"BASENAME:"<<fi_m["afmx_img_basename"];
+		qInfo()<<"  SUFFIX:"<<fi_m["afmx_img_suffix"];
+		qInfo()<<" ABSPATH:"<<fi_m["afmx_img_abspath"];
+		qInfo()<<" CREATED:"<<fi_m["afmx_img_basename_created"];
 			
-			QString key = *fi_m_keys_it;
-			qInfo()<<"IMGCACHE:"<<fi_m["afmx_img_basename_cache"];
-			qInfo()<<"BASENAME:"<<fi_m["afmx_img_basename"];
-			qInfo()<<"  SUFFIX:"<<fi_m["afmx_img_suffix"];
-			qInfo()<<" ABSPATH:"<<fi_m["afmx_img_abspath"];
-			qInfo()<<" CREATED:"<<fi_m["afmx_img_basename_created"];
-			break;
-			
-		}
 		qInfo()<<"}";
 	}
 	afmxImgListMap["listMap"] = li;
