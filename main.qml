@@ -40,7 +40,8 @@ ApplicationWindow {
         onAccepted: {
             console.log("You chose: " + Qt.resolvedUrl(fileDialog.folder))
             afmxImageList.folderPath = fileDialog.folder
-            Qt.quit()
+            root.state = "Selected"
+            
         }
         onRejected: {
             console.log("Canceled")
@@ -66,9 +67,4 @@ ApplicationWindow {
 
         ]
     }
-    
-    
-    
-    
-    
 }

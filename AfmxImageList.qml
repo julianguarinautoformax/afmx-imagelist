@@ -8,12 +8,24 @@ Item {
     property bool testPath: false
     property string folderPath: ""
 
-    
+    function insertImage(name){
+        accordionModel.append({"image":name})
+    }
     
     AfmxImageListViewController{
         
         id: viewController
-        
+        onAfmxImgListViewUpdated: {
+            var listmap = data["listMap"]
+            console.log(listmap.length)
+            
+            var idx;
+            for (idx = 0;idx<listmap.length;++idx){
+                console.log(listmap[idx]["afmx_img_basename"])
+                afmxImageList.insertImage(listmap[idx]["afmx_img_basename"])
+            }
+            
+        }
         
         
         
@@ -43,8 +55,8 @@ Item {
             
             anchors.fill:parent
             GridView{
-                id:accordionView
-                clip:true
+                id :accordionView
+                clip: true
                 anchors.fill:parent
                 cellHeight: parent.height/accordionContainer.maxrows
                 cellWidth: cellHeight
@@ -90,12 +102,8 @@ Item {
                     // This is available in all editors.
                     accordionModel.append({"image":index})
                 }
-
             }
-
-
         }        
-        
     }
     
     

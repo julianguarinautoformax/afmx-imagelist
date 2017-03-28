@@ -18,7 +18,7 @@ class AfmxImageListJson :public QObject
     Q_PROPERTY(QStringList filters READ filters WRITE setfilters)
     Q_PROPERTY(QString dirpath READ dirpath WRITE setdirpath)
 	Q_PROPERTY(bool valid READ valid WRITE setvalid)
-	
+	Q_PROPERTY(QVariantMap data READ data)
 	
 	void updateImageList();
 public:
@@ -31,6 +31,7 @@ public:
     QString dirpath() const{return afmxImgDirPath.absolutePath();}
 	void setdirpath(QString & directoryPath);
     
+	QVariantMap data() const{return afmxImgListMap;}
     
     bool valid(){ return m_valid; }
 	void setvalid(bool value){m_valid = value;}
